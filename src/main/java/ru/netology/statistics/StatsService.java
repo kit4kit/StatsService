@@ -2,7 +2,7 @@ package ru.netology.statistics;
 
 public class StatsService {
     //Сумму всех продаж
-    public long CalculateSum (long[] purchases){
+    public long calculateSum (long[] purchases){
         long sum = 0;
         for (long purchase : purchases){
             sum += purchase;
@@ -10,17 +10,13 @@ public class StatsService {
         return sum;
     }
     //Средняя сумма продаж в месяц
-    public long CalculateAverageForMonths (long[] purchases){
-        long sum = 0;
-        long month = 12;
-        for (long purchase : purchases){
-            sum += purchase;
-        }
-        long average = sum / month;
+    public long calculateAverageForMonths (long[] purchases){
+        long sum = calculateSum(purchases);
+        long average = sum / purchases.length;
         return average;
     }
     //Месяц в котором был пик продаж
-    public long PeakSales (long[] purchases){
+    public long peakSales (long[] purchases){
         long peak = 0;
         long numberMonth = 0;
         long currentMonth = 1;
@@ -34,7 +30,7 @@ public class StatsService {
         return numberMonth;
     }
     //Месяц в котором был минимум продаж
-    public long MinimumSales (long[] purchases){
+    public long minimumSales (long[] purchases){
         long minimun = purchases[0];
         long numberMonth = 0;
         long currentMonth = 1;
@@ -47,13 +43,8 @@ public class StatsService {
         return numberMonth;
     }
     //Колличество месяцев, в котором было продаж ниже среднего
-    public long CalculateCountMonthUnderAverage(long[] purchases){
-        long sum = 0;
-        long month = 12;
-        for (long purchase : purchases){
-            sum += purchase;
-        }
-        long average = sum / month;
+    public long calculateCountMonthUnderAverage(long[] purchases){
+        long average = calculateAverageForMonths(purchases);
         long countMonth = 0;
         for (long purchase : purchases){
             if(purchase < average){
@@ -63,14 +54,9 @@ public class StatsService {
         return  countMonth;
     }
     //Колличество месяцев, в котором было продаж выше среднего
-    public long CalculateCountMonthOverAverage(long[] purchases){
-        long sum = 0;
-        long month = 12;
-        for (long purchase : purchases){
-            sum += purchase;
-        }
-        long average = sum / month;
+    public long calculateCountMonthOverAverage(long[] purchases){
         long countMonth = 0;
+        long average = calculateAverageForMonths(purchases);
         for (long purchase : purchases){
             if(purchase > average){
                 countMonth++;
